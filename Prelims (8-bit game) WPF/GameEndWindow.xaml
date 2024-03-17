@@ -1,0 +1,14 @@
+﻿<Window x:Class="BinaryConverterGame.GameEndWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Game End" Height="300" Width="400">
+    <Grid>
+        <Button x:Name="LeaderboardButton" Content="Leaderboard" HorizontalAlignment="Right" VerticalAlignment="Top" Click="LeaderboardButton_Click"/>
+        <TextBlock Text="TIME'S UP!" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel Margin="10">
+            <TextBlock x:Name="ScoreTextBlock" Text="{Binding Score}" Margin="0 10" FontWeight="Bold"/>
+            <TextBlock x:Name="ElapsedTimeTextBlock" Text="{Binding ElapsedTime}" Margin="0 10" FontWeight="Bold"/>
+            <Button x:Name="EndGameButton" Content="End Game" Click="EndGameButton_Click" HorizontalAlignment="Center" Margin="0 100"/>
+        </StackPanel>
+    </Grid>
+</Window>

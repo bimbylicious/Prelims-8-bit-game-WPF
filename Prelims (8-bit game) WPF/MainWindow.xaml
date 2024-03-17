@@ -1,0 +1,77 @@
+﻿<Window x:Class="BinaryConverterGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Binary Converter Game" Height="500" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Convert the displayed decimal number to binary by clicking the buttons:" Margin="5"/>
+        <TextBlock Grid.Row="1" x:Name="DecimalTextBlock" TextAlignment="Center" FontSize="20" FontWeight="Bold" Margin="5" Visibility="Hidden"/>
+
+        <!-- Bit buttons stack panel -->
+        <StackPanel x:Name="BitStackPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <StackPanel Orientation="Vertical" Margin="2">
+                <TextBlock Text="128" VerticalAlignment="Top"/>
+                <Button x:Name="Bit0" Content="0" Width="30" Height="30" Margin="2" Click="BitButton_Click"/>
+            </StackPanel>
+            <!-- Repeat for each button -->
+            <StackPanel Orientation="Vertical" Margin="2">
+                <TextBlock Text="64" VerticalAlignment="Top"/>
+                <Button x:Name="Bit1" Content="0" Width="30" Height="30" Margin="2" Click="BitButton_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="2">
+                <TextBlock Text="32" VerticalAlignment="Top"/>
+                <Button x:Name="Bit2" Content="0" Width="30" Height="30" Margin="2" Click="BitButton_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="2">
+                <TextBlock Text="16" VerticalAlignment="Top"/>
+                <Button x:Name="Bit3" Content="0" Width="30" Height="30" Margin="2" Click="BitButton_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="2">
+                <TextBlock Text="8" VerticalAlignment="Top"/>
+                <Button x:Name="Bit4" Content="0" Width="30" Height="30" Margin="2" Click="BitButton_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="2">
+                <TextBlock Text="4" VerticalAlignment="Top"/>
+                <Button x:Name="Bit5" Content="0" Width="30" Height="30" Margin="2" Click="BitButton_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="2">
+                <TextBlock Text="2" VerticalAlignment="Top"/>
+                <Button x:Name="Bit6" Content="0" Width="30" Height="30" Margin="2" Click="BitButton_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="2">
+                <TextBlock Text="1" VerticalAlignment="Top"/>
+                <Button x:Name="Bit7" Content="0" Width="30" Height="30" Margin="2" Click="BitButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Start button, Submit button, and Timer text block -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <!-- Start button -->
+            <Button x:Name="StartButton" Content="Start Timer" Click="StartButton_Click" Margin="5"/>
+            <!-- Submit button -->
+            <Button x:Name="SubmitButton" Content="Check Answer" Click="SubmitButton_Click" Margin="5"/>
+            <!-- TextBlock to display time remaining -->
+            <TextBlock x:Name="TimerTextBlock" Margin="5" Visibility="Visible"/>
+            <!-- TextBlock to display elapsed time -->
+            <TextBlock x:Name="ElapsedTimeTextBlock" Margin="5" Visibility="Visible"/>
+        </StackPanel>
+
+        <!-- TextBlock to display overall time elapsed -->
+        <TextBlock x:Name="OverallTimeTextBlock" Grid.Row="4" Margin="5" HorizontalAlignment="Center" Visibility="Visible"/>
+
+        <!-- TextBlock to display score -->
+        <TextBlock x:Name="ScoreTextBlock" Grid.Row="5" Margin="5" HorizontalAlignment="Center"/>
+
+        <!-- TextBlock to display current round -->
+        <TextBlock x:Name="RoundTextBlock" FontSize="30" Grid.Row="6" Margin="5" HorizontalAlignment="Center"/>
+    </Grid>
+</Window>
