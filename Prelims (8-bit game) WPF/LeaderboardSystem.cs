@@ -1,53 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 
 namespace BinaryConverterGame
 {
     public class LeaderboardSystem
     {
         private const string leaderboardFileName = "leaderboard.csv";
-        private const string leaderboardDirectory = "C:\\Users\\PC\\source\\repos\\Prelims (8-bit game) WPF\\Prelims (8-bit game) WPF\\bin\\Debug";
+        private string leaderboardDirectory = "C:\\Users\\PC\\OneDrive\\Desktop\\LEADERBOARDSS";
+
 
         private string leaderboardFilePath => Path.Combine(leaderboardDirectory, leaderboardFileName);
-
 
         public void UpdateLeaderboard(string playerName, int score, int elapsedTime)
         {
             List<LeaderboardEntry> leaderboard = LoadLeaderboard();
             leaderboard.Add(new LeaderboardEntry(playerName, score, elapsedTime));
             leaderboard.Sort((x, y) => y.Score.CompareTo(x.Score)); // Sort the leaderboard
-            SaveLeaderboard(leaderboard);
+            SaveLeaderboard(leaderboard); // Save the updated leaderboard
         }
+
 
         public List<LeaderboardEntry> LoadLeaderboard()
         {
             List<LeaderboardEntry> leaderboard = new List<LeaderboardEntry>();
 
-            if (File.Exists(leaderboardFilePath))
+            try
             {
-                string[] lines = File.ReadAllLines(leaderboardFilePath);
-                foreach (string line in lines)
+                if (File.Exists(leaderboardFilePath))
                 {
-                    string[] parts = line.Split(',');
-                    if (parts.Length == 3 && int.TryParse(parts[1], out int score) && int.TryParse(parts[2], out int elapsedTime))
+                    string[] lines = File.ReadAllLines(leaderboardFilePath);
+                    foreach (string line in lines)
                     {
-                        leaderboard.Add(new LeaderboardEntry(parts[0], score, elapsedTime));
+                        string[] parts = line.Split(',');
+                        if (parts.Length == 3 && int.TryParse(parts[1], out int score) && int.TryParse(parts[2], out int elapsedTime))
+                        {
+                            leaderboard.Add(new LeaderboardEntry(parts[0], score, elapsedTime));
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Invalid entry found in the leaderboard file: {line}", "Leaderboard Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Leaderboard file does not exist.", "Leaderboard Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading leaderboard: {ex.Message}", "Leaderboard Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return leaderboard;
         }
 
+
+
         private void SaveLeaderboard(List<LeaderboardEntry> leaderboard)
         {
             try
             {
-                // Ensure directory exists
                 Directory.CreateDirectory(leaderboardDirectory);
 
-                // Write to file
                 using (StreamWriter writer = new StreamWriter(leaderboardFilePath))
                 {
                     foreach (LeaderboardEntry entry in leaderboard)
@@ -55,20 +72,22 @@ namespace BinaryConverterGame
                         writer.WriteLine($"{entry.PlayerName},{entry.Score},{entry.ElapsedTime}");
                     }
                 }
+                MessageBox.Show("Leaderboard saved successfully.", "Leaderboard Info", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving leaderboard: {ex.Message}");
+                MessageBox.Show($"Error saving leaderboard: {ex.Message}", "Leaderboard Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
     }
 
     public class LeaderboardEntry
     {
-        public string PlayerName { get; }
-        public int Score { get; }
-        public int ElapsedTime { get; }
+        public string PlayerName { get; set; }
+        public int Score { get; set; }
+        public int ElapsedTime { get; set; }
 
         public LeaderboardEntry(string playerName, int score, int elapsedTime)
         {
@@ -77,4 +96,5 @@ namespace BinaryConverterGame
             ElapsedTime = elapsedTime;
         }
     }
+
 }

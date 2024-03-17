@@ -3,6 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Leaderboard" Height="300" Width="400">
     <Grid>
-        <ListBox x:Name="LeaderboardListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <!-- Adjust width as needed -->
+                <ColumnDefinition Width="80"/>
+                <!-- Adjust width as needed -->
+                <ColumnDefinition Width="80"/>
+                <!-- Adjust width as needed -->
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name" Grid.Column="0" Margin="5"/>
+            <TextBlock Text="Score" Grid.Column="1" Margin="5"/>
+            <TextBlock Text="Time" Grid.Column="2" Margin="5"/>
+        </Grid>
+
+        <!-- Entries -->
+        <ListBox x:Name="LeaderboardListBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <!-- Adjust width as needed -->
+                            <ColumnDefinition Width="80"/>
+                            <!-- Adjust width as needed -->
+                            <ColumnDefinition Width="80"/>
+                            <!-- Adjust width as needed -->
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding PlayerName}" Grid.Column="0" Margin="5"/>
+                        <TextBlock Text="{Binding Score}" Grid.Column="1" Margin="5"/>
+                        <TextBlock Text="{Binding ElapsedTime}" Grid.Column="2" Margin="5"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

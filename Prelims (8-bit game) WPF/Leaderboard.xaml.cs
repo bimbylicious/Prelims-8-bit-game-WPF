@@ -5,17 +5,18 @@ namespace BinaryConverterGame
 {
     public partial class LeaderboardWindow : Window
     {
+        private LeaderboardSystem leaderboardSystem;
+
         public LeaderboardWindow()
         {
             InitializeComponent();
+            leaderboardSystem = new LeaderboardSystem();
             LoadLeaderboard();
         }
 
         private void LoadLeaderboard()
         {
-            LeaderboardSystem leaderboardSystem = new LeaderboardSystem();
             List<LeaderboardEntry> leaderboardEntries = leaderboardSystem.LoadLeaderboard();
-
             LeaderboardListBox.ItemsSource = leaderboardEntries;
         }
     }

@@ -194,7 +194,7 @@ namespace BinaryConverterGame
             if (IsTop10(score))
             {
                 // If the score is top 10, prompt for player name
-                EnterNameWindow enterNameWindow = new EnterNameWindow(score);
+                EnterNameWindow enterNameWindow = new EnterNameWindow(score, elapsedTimeOverall);
                 if (enterNameWindow.ShowDialog() == true)
                 {
                     leaderboardSystem.UpdateLeaderboard(enterNameWindow.PlayerName, score, elapsedTimeOverall);
@@ -212,5 +212,12 @@ namespace BinaryConverterGame
             List<LeaderboardEntry> leaderboard = leaderboardSystem.LoadLeaderboard();
             return leaderboard.Count < 10 || score > leaderboard.Last().Score;
         }
+        private void LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Open the leaderboard window
+            LeaderboardWindow leaderboardWindow = new LeaderboardWindow();
+            leaderboardWindow.ShowDialog();
+        }
+
     }
 }
